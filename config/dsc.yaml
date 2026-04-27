@@ -1,0 +1,47 @@
+# DataScienceCluster — the primary Custom Resource that toggles
+# which RHOAI components are enabled.
+#
+# This template targets RHOAI 3.3+ (API version v2).
+# Component names and structure changed from 2.x:
+#   - datasciencepipelines -> aipipelines
+#   - modelmeshserving removed (replaced by KServe RawDeployment)
+#   - kserve.serving removed (RawDeployment is the only mode)
+#   - new components: feastoperator, llamastackoperator, mlflowoperator, trainer
+#
+# All components are set to Managed for strict laptop parity.
+# Components that fail on constrained resources are documented in
+# docs/parity-scope.md rather than silently removed here.
+#
+# Ref: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/
+apiVersion: datasciencecluster.opendatahub.io/v2
+kind: DataScienceCluster
+metadata:
+  name: default-dsc
+spec:
+  components:
+    dashboard:
+      managementState: Managed
+    workbenches:
+      managementState: Managed
+    aipipelines:
+      managementState: Managed
+    kserve:
+      managementState: Managed
+    ray:
+      managementState: Managed
+    kueue:
+      managementState: Managed
+    trainingoperator:
+      managementState: Managed
+    trainer:
+      managementState: Managed
+    trustyai:
+      managementState: Managed
+    modelregistry:
+      managementState: Managed
+    feastoperator:
+      managementState: Managed
+    llamastackoperator:
+      managementState: Managed
+    mlflowoperator:
+      managementState: Managed

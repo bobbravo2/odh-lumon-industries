@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Secrets (never commit pull secrets)
+pull-secret*
+*.json.secret
+
+# CRC state
+.crc/

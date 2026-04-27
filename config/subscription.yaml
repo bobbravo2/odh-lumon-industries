@@ -1,0 +1,27 @@
+# OLM Subscription for Red Hat OpenShift AI (RHOAI) operator.
+#
+# Uses the downstream RHOAI operator from the Red Hat Operators catalog
+# because it ships multi-arch images (amd64, arm64, ppc64le, s390x).
+# The community opendatahub-operator is amd64-only and crashes on
+# Apple Silicon CRC clusters.
+#
+# PULL SECRET REQUIREMENT:
+#   RHOAI images live in registry.redhat.io, which requires authentication.
+#   Your Red Hat pull secret (https://console.redhat.com/openshift/install/pull-secret)
+#   must include registry.redhat.io credentials. CRC injects the pull secret
+#   into the cluster during 'crc start', so if your pull secret is valid,
+#   no additional auth configuration is needed.
+#
+# Source: https://ai-on-openshift.io/odh-rhoai/gitops
+# Ref: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: openshift-operators
+spec:
+  channel: fast-3.x
+  installPlanApproval: Automatic
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace

@@ -1,0 +1,9 @@
+# OperatorGroup for the ODH operator namespace.
+# OLM requires an OperatorGroup in the namespace before a Subscription
+# can install an operator.
+# Source: https://ai-on-openshift.io/odh-rhoai/gitops
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: opendatahub-operator-group
+  namespace: openshift-operators

@@ -1,0 +1,14 @@
+# Operator namespace for Red Hat OpenShift AI (RHOAI).
+#
+# The RHOAI operator deploys components into 'redhat-ods-applications'
+# by default (configured in DSCInitialization). This namespace is created
+# automatically by the operator, but we ensure it exists upfront.
+#
+# Source: https://ai-on-openshift.io/odh-rhoai/gitops
+# Ref: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/display-name: "Red Hat OpenShift AI"
+  name: redhat-ods-applications
