@@ -25,10 +25,12 @@ lumon-industries — the thin orchestration wrapper that deploys
 
 | Directory | Purpose |
 |---|---|
-| `scripts/` | Shell scripts for preflight, CRC (OpenShift Local) lifecycle, deploy, and smoke |
-| `config/` | OLM (Operator Lifecycle Manager) Custom Resource templates: Subscription (install instruction), DSCInitialization (DSCI), DataScienceCluster (DSC), etc. |
+| `scripts/` | Shell scripts for preflight, CRC lifecycle, deploy, smoke, and RBAC validation |
+| `config/` | OLM Custom Resource templates: Subscription, DSCInitialization (DSCI), DataScienceCluster (DSC), etc. |
 | `docs/` | Supplemental documentation — covers only what differs from the canonical Red Hat docs |
-| `test/` | Bats tests for script logic |
+| `test/` | Bats and Python unit tests for script logic |
+| `run.sh` | One-shot deployment entrypoint |
+| `quest.sh` | RBAC quest entrypoint (wraps `scripts/rbac-quest.py`) |
 
 ## Standards
 
@@ -49,7 +51,7 @@ operator resources:
 1. Run `bash scripts/role-check.sh` and verify all checks pass.
 2. Test the feature as `developer` (not just `kubeadmin`).
 
-New to RBAC on this project? Run `python3 scripts/rbac-quest.py --persona both`
+New to RBAC on this project? Run `bash quest.sh --persona both`
 for a guided walkthrough.
 
 Changes to `role-check.sh` or `rbac-quest.py` must be validated against a

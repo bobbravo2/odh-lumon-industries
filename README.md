@@ -52,10 +52,27 @@ important.
 If you prefer to run the stages individually:
 
 ```bash
-bash scripts/preflight.sh        # verify prerequisites
+bash scripts/preflight.sh           # verify prerequisites
 bash scripts/crc-lifecycle.sh start  # start the cluster
-bash scripts/deploy.sh           # deploy ODH
-bash scripts/smoke.sh            # validate
+bash scripts/deploy.sh              # deploy ODH
+bash scripts/smoke.sh               # validate
+bash scripts/role-check.sh          # validate RBAC boundaries
+```
+
+## RBAC onboarding
+
+After deployment, validate that role-based access controls are working
+and learn how they map to platform engineer / data scientist workflows:
+
+```bash
+bash scripts/role-check.sh          # 30-second automated RBAC parity check
+bash quest.sh --persona both        # interactive guided walkthrough (~20 min)
+```
+
+The quest runner requires Python 3 and the `rich` package:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## What gets deployed

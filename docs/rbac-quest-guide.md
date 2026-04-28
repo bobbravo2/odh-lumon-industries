@@ -121,13 +121,13 @@ Interactive gamified RBAC learning with persona tracks.
 **Prerequisites:**
 
 ```bash
-uv pip install rich     # or: pipx install rich
+pip install -r requirements.txt
 ```
 
 **Usage:**
 
 ```bash
-python3 scripts/rbac-quest.py --persona mdr|od|both
+bash quest.sh --persona mdr|od|both
 ```
 
 | Flag | Description |
@@ -141,7 +141,7 @@ python3 scripts/rbac-quest.py --persona mdr|od|both
 
 **Time estimates:** ~10 min per track, ~20 min for full clearance.
 
-Quest level details are available via `python3 scripts/rbac-quest.py --help`.
+Quest level details are available via `bash quest.sh --help`.
 
 ## Integration
 

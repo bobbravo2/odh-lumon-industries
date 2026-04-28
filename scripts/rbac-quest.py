@@ -16,7 +16,7 @@ try:
     from rich.table import Table
     from rich.panel import Panel
 except ImportError:
-    print("Error: 'rich' package required. Install: uv pip install rich")
+    print("Error: 'rich' package required. Install: pip install -r requirements.txt")
     sys.exit(1)
 
 console = Console()

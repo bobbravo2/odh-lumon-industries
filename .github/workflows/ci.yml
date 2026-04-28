@@ -49,5 +49,5 @@ jobs:
 
       - name: Python unit tests
         run: |
-          pip install rich
+          pip install -r requirements.txt
           python3 -m unittest discover test/ -p 'test_*.py' -v

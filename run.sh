@@ -30,3 +30,10 @@ bash "${SCRIPT_DIR}/scripts/deploy.sh"
 echo ""
 
 bash "${SCRIPT_DIR}/scripts/smoke.sh"
+echo ""
+
+echo "── Next Steps ──"
+echo ""
+echo "   Validate RBAC boundaries:  bash scripts/role-check.sh"
+echo "   RBAC onboarding quest:     bash quest.sh --persona both"
+echo ""
