@@ -13,10 +13,12 @@ For canonical RBAC documentation, see:
 
 CRC provides two pre-configured accounts:
 
-| Account | Username | Password | Role |
-|---|---|---|---|
-| Developer | `developer` | `developer` | Regular authenticated user, no cluster-admin |
-| Admin | `kubeadmin` | *(generated, see `crc console --credentials`)* | Full cluster-admin |
+
+| Account   | Username    | Password                                       | Role                                         |
+| --------- | ----------- | ---------------------------------------------- | -------------------------------------------- |
+| Developer | `developer` | `developer`                                    | Regular authenticated user, no cluster-admin |
+| Admin     | `kubeadmin` | *(generated, see `crc console --credentials`)* | Full cluster-admin                           |
+
 
 **Feature developers should default to `developer/developer` for all
 day-to-day work.** This includes:
@@ -32,19 +34,32 @@ day-to-day work.** This includes:
 oc login -u developer -p developer https://api.crc.testing:6443
 ```
 
+## Personas
+
+
+| Division                   | Role              | Account     | Scope                                                    |
+| -------------------------- | ----------------- | ----------- | -------------------------------------------------------- |
+| Macrodata Refinement (MDR) | Data Scientist    | `developer` | Namespace — own projects, workbenches, pipelines, models |
+| Optics & Design (O&D)      | Platform Engineer | `kubeadmin` | Cluster — operators, DSC/DSCI, groups, dashboard config  |
+| The Board                  | Cluster Admin     | `kubeadmin` | Break-glass — initial deployment, operator install only  |
+
+
+For details on enterprise trust boundaries and regulated-industry context,
+see [RBAC quest guide](rbac-quest-guide.md).
+
 ## Why not kubeadmin?
 
 Using `kubeadmin` (cluster-admin) by default causes real problems:
 
 - **Hidden permission bugs**: code that works under cluster-admin may fail
-  for real users who only have namespace-scoped RBAC. If you develop and
-  test as kubeadmin, you won't discover these failures until a customer does.
+for real users who only have namespace-scoped RBAC. If you develop and
+test as kubeadmin, you won't discover these failures until a customer does.
 - **Overprivileged defaults**: features that accidentally require
-  cluster-admin but shouldn't will ship to production undetected.
+cluster-admin but shouldn't will ship to production undetected.
 - **False confidence in RBAC**: the dashboard and API surfaces behave
-  differently for admin vs. non-admin users (different nav items, different
-  API responses, different feature flags). Testing only as kubeadmin means
-  you've only tested one of the two code paths.
+differently for admin vs. non-admin users (different nav items, different
+API responses, different feature flags). Testing only as kubeadmin means
+you've only tested one of the two code paths.
 
 ## When to use kubeadmin
 
@@ -64,27 +79,25 @@ oc login -u kubeadmin -p "$(crc console --credentials 2>/dev/null \
 ```
 
 Or use the lifecycle helper:
+
 ```bash
 bash scripts/crc-lifecycle.sh login
 ```
 
 ## Multi-role testing
 
-Testing the dashboard and feature access across roles is critical but is
-not yet automated in this repo. The minimum manual workflow:
+Automated multi-role validation is available via `bash scripts/role-check.sh`,
+which runs RBAC parity checks across both personas in ~30 seconds using
+`oc auth can-i --as=` impersonation. For a guided walkthrough of RBAC
+concepts, see the [RBAC quest guide](rbac-quest-guide.md).
 
 1. **Test as `developer`** — verify the feature works for a regular user.
-   This is the default and should be the first and most common test pass.
-
+  This is the default and should be the first and most common test pass.
 2. **Test as `kubeadmin`** — verify admin-only features appear and
-   function correctly, and that admin operations do not break non-admin
+  function correctly, and that admin operations do not break non-admin
    access.
-
 3. **Compare** — confirm that non-admin users do not see admin-only
-   controls, and that admin users see everything they should.
-
-A future follow-up should automate multi-role test runs, potentially using
-Cypress or Playwright with separate login sessions per role.
+  controls, and that admin users see everything they should.
 
 ## Adding custom users and groups
 
@@ -106,10 +119,13 @@ oc adm groups add-users rhods-admins <username>
 
 ## Summary
 
-| Scenario | Account | Why |
-|---|---|---|
-| Feature development | `developer` | Matches real customer permissions |
-| Dashboard UI testing | `developer` | Tests the non-admin code path |
-| Operator or DSC changes | `kubeadmin` | Requires cluster-admin |
-| deploy.sh / smoke.sh | `kubeadmin` | Scripts need cluster-level access |
-| Multi-role validation | Both | Compare behavior across roles |
+
+| Scenario                | Account     | Why                               |
+| ----------------------- | ----------- | --------------------------------- |
+| Feature development     | `developer` | Matches real customer permissions |
+| Dashboard UI testing    | `developer` | Tests the non-admin code path     |
+| Operator or DSC changes | `kubeadmin` | Requires cluster-admin            |
+| deploy.sh / smoke.sh    | `kubeadmin` | Scripts need cluster-level access |
+| Multi-role validation   | Both        | Compare behavior across roles     |
+
+

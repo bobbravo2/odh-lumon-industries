@@ -41,6 +41,20 @@ lumon-industries — the thin orchestration wrapper that deploys
 - **Docs link upstream** — do not duplicate Red Hat documentation. Link to
   it and document only what differs.
 
+## RBAC awareness
+
+Before opening a PR for features that touch RBAC, dashboard config, or
+operator resources:
+
+1. Run `bash scripts/role-check.sh` and verify all checks pass.
+2. Test the feature as `developer` (not just `kubeadmin`).
+
+New to RBAC on this project? Run `python3 scripts/rbac-quest.py --persona both`
+for a guided walkthrough.
+
+Changes to `role-check.sh` or `rbac-quest.py` must be validated against a
+freshly deployed CRC cluster before merging.
+
 ## Commit messages
 
 Short, imperative mood. Examples:

@@ -83,6 +83,7 @@ All templates live in `config/` and can be overridden for custom configurations.
 | [Host requirements](docs/host-requirements.md)                                                           | Hardware floor and CRC version guidance            |
 | [Parity scope](docs/parity-scope.md)                                                                     | What "full product" means on a laptop              |
 | [Roles and permissions](docs/roles-and-permissions.md)                                                   | Use `developer`, not `kubeadmin`, for feature work |
+| [RBAC quest guide](docs/rbac-quest-guide.md)                                                             | Gamified RBAC onboarding for platform engineers and data scientists |
 | [Relationship to innie](docs/relationship-to-innie.md)                                                   | How this repo relates to workstation bootstrap     |
 | [Red Hat OpenShift AI docs](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/) | Canonical upstream documentation                   |
 

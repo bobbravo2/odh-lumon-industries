@@ -46,3 +46,8 @@ jobs:
 
       - name: Run unit tests
         run: bats test/
+
+      - name: Python unit tests
+        run: |
+          pip install rich
+          python3 -m unittest discover test/ -p 'test_*.py' -v

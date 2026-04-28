@@ -12,5 +12,8 @@
 pull-secret*
 *.json.secret
 
+# Python virtualenv
+.venv/
+
 # CRC state
 .crc/
