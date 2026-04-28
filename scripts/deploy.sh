@@ -140,6 +140,28 @@ oc apply -f "${CONFIG_DIR}/dsc.yaml"
 echo "  ✅ DataScienceCluster applied."
 echo ""
 
+# ── Step 6b: Scale dashboard to 1 replica for single-node CRC ──
+# The RHOAI dashboard deployment defaults to 2 replicas for HA. On a
+# single-node CRC cluster the second replica stays Pending (insufficient
+# CPU/memory), which blocks the DSC from reaching Ready. One replica is
+# fully functional — HA is not meaningful on a laptop.
+echo "── Step 6b: Scaling dashboard to 1 replica (single-node CRC) ──"
+retries=0
+while (( retries < 12 )); do
+  if oc get deployment rhods-dashboard -n "$APPLICATIONS_NAMESPACE" &>/dev/null 2>&1; then
+    oc scale deployment rhods-dashboard -n "$APPLICATIONS_NAMESPACE" --replicas=1 2>/dev/null
+    echo "  ✅ Dashboard scaled to 1 replica."
+    break
+  fi
+  retries=$(( retries + 1 ))
+  sleep 10
+done
+if (( retries >= 12 )); then
+  echo "  ⚠️  Dashboard deployment not found yet. Scale manually if DSC stays Not Ready:"
+  echo "     oc scale deployment rhods-dashboard -n $APPLICATIONS_NAMESPACE --replicas=1"
+fi
+echo ""
+
 # ── Step 7: Wait for DSC reconciliation ──
 echo "── Step 7: Waiting for DataScienceCluster reconciliation ──"
 elapsed=0

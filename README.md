@@ -24,15 +24,15 @@ product.
 ## Prerequisites
 
 
-| Requirement | Minimum | Tested |
-|---|---|---|
-| macOS | 13 (Ventura) | Latest |
-| RAM | 32 GB (28 GB for CRC) | 48 GB |
-| Disk | 50 GB free | 100 GB free |
-| CPU | 6 physical cores | 10+ cores allocated to CRC |
-| [OpenShift Local (CRC)](https://console.redhat.com/openshift/create/local) | Installed | Latest |
-| [Red Hat pull secret](https://console.redhat.com/openshift/install/pull-secret) | Present on disk (must include `registry.redhat.io`) | -- |
-| `oc` CLI (OpenShift command-line client) | Installed | -- |
+| Requirement                                                                     | Minimum                                             | Tested                     |
+| ------------------------------------------------------------------------------- | --------------------------------------------------- | -------------------------- |
+| macOS                                                                           | 13 (Ventura)                                        | Latest                     |
+| RAM                                                                             | 32 GB (28 GB for CRC)                               | 48 GB                      |
+| Disk                                                                            | 50 GB free                                          | 100 GB free                |
+| CPU                                                                             | 6 physical cores                                    | 10+ cores allocated to CRC |
+| [OpenShift Local (CRC)](https://console.redhat.com/openshift/create/local)      | Installed                                           | Latest                     |
+| [Red Hat pull secret](https://console.redhat.com/openshift/install/pull-secret) | Present on disk (must include `registry.redhat.io`) | --                         |
+| `oc` CLI (OpenShift command-line client)                                        | Installed                                           | --                         |
 
 
 Optional: run [innie](https://github.com/bobbravo2/innie) first to bootstrap
@@ -78,13 +78,13 @@ All templates live in `config/` and can be overridden for custom configurations.
 ## Documentation
 
 
-| Document                                                                                                 | Description                                    |
-| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [Host requirements](docs/host-requirements.md)                                                           | Hardware floor and CRC version guidance        |
-| [Parity scope](docs/parity-scope.md)                                                                     | What "full product" means on a laptop          |
-| [Roles and permissions](docs/roles-and-permissions.md) | Use `developer`, not `kubeadmin`, for feature work |
-| [Relationship to innie](docs/relationship-to-innie.md) | How this repo relates to workstation bootstrap |
-| [Red Hat OpenShift AI docs](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/) | Canonical upstream documentation |
+| Document                                                                                                 | Description                                        |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [Host requirements](docs/host-requirements.md)                                                           | Hardware floor and CRC version guidance            |
+| [Parity scope](docs/parity-scope.md)                                                                     | What "full product" means on a laptop              |
+| [Roles and permissions](docs/roles-and-permissions.md)                                                   | Use `developer`, not `kubeadmin`, for feature work |
+| [Relationship to innie](docs/relationship-to-innie.md)                                                   | How this repo relates to workstation bootstrap     |
+| [Red Hat OpenShift AI docs](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/) | Canonical upstream documentation                   |
 
 
 ## Contributing

@@ -15,6 +15,14 @@ echo ""
 bash "${SCRIPT_DIR}/scripts/preflight.sh"
 echo ""
 
+# Run crc setup if the daemon is not installed (first run or post-cleanup).
+if ! crc status &>/dev/null 2>&1; then
+  echo "🔧 CRC needs setup (first run or post-cleanup). Running crc-lifecycle.sh setup..."
+  echo ""
+  bash "${SCRIPT_DIR}/scripts/crc-lifecycle.sh" setup
+  echo ""
+fi
+
 bash "${SCRIPT_DIR}/scripts/crc-lifecycle.sh" start
 echo ""
 
