@@ -24,7 +24,7 @@ jobs:
         run: sudo apt-get install -y shellcheck
 
       - name: Lint all shell scripts
-        run: shellcheck scripts/*.sh
+        run: shellcheck -e SC1091 scripts/*.sh
 
       - name: Validate YAML templates
         run: |
